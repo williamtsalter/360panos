@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Llara Farm 360</title>
+  https://cdn.jsdelivr.net/npm/pannellum@2.5.7/build/pannellum.css
+  https://cdn.jsdelivr.net/npm/pannellum@2.5.7/build/pannellum.js  </script>
+  <style>
+    html, body, #panorama { width:100%; height:100%; margin:0; }
+  </style>
+</head>
+<body>
+  <div id="panorama"></div>
+  <script>
+    pannellum.viewer('panorama', {
+      type: 'multires',
+      autoLoad: true,
+      multiRes: {
+        basePath: 'output',
+        path: '/%l/%s%y_%x',
+        fallbackPath: '/fallback/%s',
+        extension: 'jpg',
+        tileResolution: 512,
+        maxLevel: 6,
+        cubeResolution: 10408
+      }
+    });
+  </script>
+</body>
+</html>
