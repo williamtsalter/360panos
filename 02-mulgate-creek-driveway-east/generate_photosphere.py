@@ -40,7 +40,7 @@ VIEWER_TEMPLATE = """\
 </head>
 <body>
   <div id="label">
-    <span>📍 Site {site_num} — {display_name}</span>
+    <span>📍 {display_name}</span>
     ../index.html
   </div>
   <div id="panorama"></div>
@@ -63,39 +63,49 @@ VIEWER_TEMPLATE = """\
 </html>
 """
 
+def get_display_name(slug):
+    if slug in SITE_NAMES:
+        num, name = SITE_NAMES[slug]
+        return f"Site {num} - {name}"
+    return slug.replace("-", " ").replace("_", " ").title()
+
 def find_jpeg():
-    matches = []
-    for ext in ("*.jpg","*.jpeg","*.JPG","*.JPEG"):
-        matches.extend(SITE_DIR.glob(ext))
-    matches = [p for p in matches if "tiles" not in p.parts]
+    matches = [
+        p for ext in ("*.jpg", "*.jpeg", "*.JPG", "*.JPEG")
+        for p in SITE_DIR.glob(ext)
+        if p.parent == SITE_DIR
+    ]
     matches = list({str(p): p for p in matches}.values())
     if len(matches) == 0:
-        sys.exit("ERROR: No JPEG found in this folder.")
+        sys.exit("ERROR: No JPEG found directly in this folder.")
     if len(matches) > 1:
-        sys.exit("ERROR: More than one JPEG found. Keep only the sphere JPEG.")
+        names = "\n  ".join(p.name for p in matches)
+        sys.exit(f"ERROR: More than one JPEG found:\n  {names}\n  Keep only the sphere JPEG.")
     return matches[0]
 
 def main():
     if not GENERATOR.exists():
         sys.exit(f"ERROR: Pannellum generator not found at:\n  {GENERATOR}")
 
-    slug = SITE_DIR.name
-    num, name = SITE_NAMES.get(slug, ("?", slug.replace("-"," ").title()))
+    slug         = SITE_DIR.name
+    display_name = get_display_name(slug)
 
     print(f"\n{'='*60}")
-    print(f"  Site   : {name}")
+    print(f"  Site   : {display_name}")
     print(f"  Folder : {SITE_DIR}")
     print(f"{'='*60}\n")
 
     jpeg = find_jpeg()
-    print(f"  JPEG       : {jpeg.name}  ({jpeg.stat().st_size/1e6:.1f} MB)")
+    print(f"  JPEG       : {jpeg.name}  ({jpeg.stat().st_size / 1e6:.1f} MB)")
 
     if TILES_DIR.exists():
         print(f"  Removing existing tiles ...")
         shutil.rmtree(TILES_DIR)
 
-    print(f"  Generating tiles — this may take several minutes ...\n")
-    result = subprocess.run([sys.executable, str(GENERATOR), str(jpeg), "--output", str(TILES_DIR)])
+    print(f"  Generating tiles - this may take several minutes ...\n")
+    result = subprocess.run(
+        [sys.executable, str(GENERATOR), str(jpeg), "--output", str(TILES_DIR)]
+    )
     if result.returncode != 0:
         sys.exit("ERROR: Tile generation failed.")
 
@@ -106,28 +116,26 @@ def main():
     with open(config_path) as f:
         config = json.load(f)
 
-    mr = config.get("multiRes", {})
+    mr    = config.get("multiRes", {})
     total = sum(f.stat().st_size for f in TILES_DIR.rglob("*") if f.is_file())
-    print(f"\n  Tiles done : maxLevel={mr.get('maxLevel')}  cubeResolution={mr.get('cubeResolution')}  total={total/1e6:.1f} MB")
+    print(f"\n  Tiles done : maxLevel={mr.get('maxLevel')}  cubeResolution={mr.get('cubeResolution')}  total={total / 1e6:.1f} MB")
 
     html = VIEWER_TEMPLATE.format(
-        display_name=name, site_num=num,
-        tile_res=mr.get("tileResolution",512),
-        max_level=mr.get("maxLevel",6),
-        cube_res=mr.get("cubeResolution",8432),
+        display_name=display_name,
+        tile_res=mr.get("tileResolution", 512),
+        max_level=mr.get("maxLevel", 6),
+        cube_res=mr.get("cubeResolution", 8432),
     )
-    viewer_path = SITE_DIR / "viewer.html"
-    viewer_path.write_text(html)
-    print(f"  viewer.html: {viewer_path}")
+    (SITE_DIR / "viewer.html").write_text(html)
+    print(f"  viewer.html written.")
 
     repo_dir = SITE_DIR.parent
     print(f"\n  Done. To publish:\n")
     print(f"    cd {repo_dir}")
     print(f"    git add {slug}/")
-    print(f"    git commit -m \"Add {name} panorama\"")
+    print(f"    git commit -m \"Add {display_name} panorama\"")
     print(f"    git push origin main\n")
-    print(f"  Live at:")
-    print(f"    https://williamtsalter.github.io/360panos/{slug}/viewer.html\n")
+    print(f"  Live at: https://williamtsalter.github.io/360panos/{slug}/viewer.html\n")
 
 if __name__ == "__main__":
     main()
