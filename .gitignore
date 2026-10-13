@@ -1,0 +1,9 @@
+# Ignore large source sphere JPEGs in site folders
+*.jpeg
+*.JPEG
+*.jpg
+*.JPG
+
+# But keep tile JPEGs inside tiles/ subfolders
+!tiles/
+!**/tiles/**
