@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Llara Farm 360° Panoramas</title>
+  <style>
+    body { font-family:sans-serif; max-width:800px; margin:40px auto; padding:0 20px; background:#f9f6f0; }
+    h1 { color:#2c6e49; }
+    p { color:#555; }
+    .grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:16px; margin-top:24px; }
+    .card {
+      background:white; border-radius:10px; padding:16px;
+      box-shadow:0 2px 6px rgba(0,0,0,0.1); text-decoration:none; color:#333;
+      border-left:5px solid #2c6e49;
+    }
+    .card:hover { background:#f0f7f4; }
+    .card.coming { border-left-color:#ccc; color:#aaa; cursor:default; }
+    .card .num { font-size:11px; color:#888; margin-bottom:4px; }
+    .card .name { font-weight:bold; font-size:15px; }
+    .card .status { font-size:11px; margin-top:6px; color:#2c6e49; }
+    .card.coming .status { color:#aaa; }
+  </style>
+</head>
+<body>
+  <h1>🌾 Llara Farm 360° Panoramas</h1>
+  <p>Select a site to explore the 360° panorama. Use click and drag to look around, scroll to zoom.</p>
+
+  <div class="grid">
+
+    <div class="card coming">
+      <div class="num">Site 1</div>
+      <div class="name">Mulgate Creek Weir West</div>
+      <div class="status">Coming soon</div>
+    </div>
+
+    02-mulgate-creek-driveway-east/viewer.html
+
+    <div class="card coming">
+      <div class="num">Site 3</div>
+      <div class="name">Mulgate Creek Dam</div>
+      <div class="status">Coming soon</div>
+    </div>
+
+    <div class="card coming">
+      <div class="num">Site 4</div>
+      <div class="name">Llara Hillside</div>
+      <div class="status">Coming soon</div>
+    </div>
+
+    <div class="card coming">
+      <div class="num">Site 5</div>
+      <div class="name">Llara 1</div>
+      <div class="status">Coming soon</div>
+    </div>
+
+    <div class="card coming">
+      <div class="num">Site 6</div>
+      <div class="name">Llara Forest</div>
+      <div class="status">Coming soon</div>
+    </div>
+
+    <div class="card coming">
+      <div class="num">Site 7</div>
+      <div class="name">Horsearm Creek Dam</div>
+      <div class="status">Coming soon</div>
+    </div>
+
+    <div class="card coming">
+      <div class="num">Site 8</div>
+      <div class="name">Mulgate Creek West</div>
+      <div class="status">Coming soon</div>
+    </div>
+
+  </div>
+</body>
+</html>
