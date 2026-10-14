@@ -7,3 +7,4 @@
 # But keep tile JPEGs inside tiles/ subfolders
 !tiles/
 !**/tiles/**
+.DS_Store
