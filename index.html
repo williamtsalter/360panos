@@ -5,10 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Llara Farm 360° Panoramas</title>
   <style>
-    body { font-family:sans-serif; max-width:800px; margin:40px auto; padding:0 20px; background:#f9f6f0; }
-    h1 { color:#2c6e49; }
+    body { font-family:sans-serif; max-width:860px; margin:40px auto; padding:0 20px; background:#f9f6f0; color:#333; line-height:1.55; }
+    h1 { color:#2c6e49; margin-bottom:4px; }
+    h2 { color:#2c6e49; font-size:18px; margin-top:36px; border-bottom:2px solid #d9e8df; padding-bottom:4px; }
     p { color:#555; }
-    .grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:16px; margin-top:24px; }
+    a { color:#2c6e49; }
+    .sub { color:#777; margin-top:0; }
+    .grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:16px; margin-top:20px; }
     .card {
       display:block; background:white; border-radius:10px; padding:16px;
       box-shadow:0 2px 6px rgba(0,0,0,0.1); text-decoration:none; color:#333;
@@ -20,62 +23,98 @@
     .card .name { font-weight:bold; font-size:15px; }
     .card .status { font-size:11px; margin-top:6px; color:#2c6e49; }
     .card.coming .status { color:#aaa; }
+    .specs { display:grid; grid-template-columns:repeat(auto-fill,minmax(180px,1fr)); gap:12px; margin-top:12px; }
+    .spec { background:white; border-radius:8px; padding:12px; box-shadow:0 1px 4px rgba(0,0,0,0.08); }
+    .spec .val { font-size:20px; font-weight:bold; color:#2c6e49; }
+    .spec .lbl { font-size:12px; color:#777; }
+    ol.steps li { margin-bottom:8px; color:#555; }
+    .refs { font-size:13px; color:#666; }
+    .refs li { margin-bottom:4px; }
+    footer { margin-top:40px; padding-top:16px; border-top:1px solid #ddd; font-size:12px; color:#888; }
   </style>
 </head>
 <body>
+
   <h1>🌾 Llara Farm 360° Panoramas</h1>
-  <p>Select a site to explore the 360° panorama. Click and drag to look around, scroll to zoom.</p>
+  <p class="sub">Field sites at Llara Farm, Narrabri NSW. The University of Sydney.</p>
+  <p>Select a site to explore its panorama. Click and drag to look around. Scroll or pinch to zoom.</p>
 
   <div class="grid">
-
     <div class="card coming">
       <div class="num">Site 1</div>
       <div class="name">Mulgate Creek Weir West</div>
       <div class="status">Coming soon</div>
     </div>
-
     <a class="card" href="02-mulgate-creek-driveway-east/viewer.html">
       <div class="num">Site 2</div>
       <div class="name">Mulgate Creek Driveway East</div>
       <div class="status">View 360° →</div>
     </a>
-
     <a class="card" href="03-mulgate-creek-dam/viewer.html">
       <div class="num">Site 3</div>
       <div class="name">Mulgate Creek Dam</div>
       <div class="status">View 360° →</div>
     </a>
-
     <a class="card" href="04-llara-hillside/viewer.html">
       <div class="num">Site 4</div>
       <div class="name">Llara Hillside</div>
       <div class="status">View 360° →</div>
     </a>
-
     <div class="card coming">
       <div class="num">Site 5</div>
       <div class="name">Llara 1</div>
       <div class="status">Coming soon</div>
     </div>
-
     <a class="card" href="06-llara-forest/viewer.html">
       <div class="num">Site 6</div>
       <div class="name">Llara Forest</div>
       <div class="status">View 360° →</div>
     </a>
-
     <a class="card" href="07-horsearm-creek-dam/viewer.html">
       <div class="num">Site 7</div>
       <div class="name">Horsearm Creek Dam</div>
       <div class="status">View 360° →</div>
     </a>
-
     <a class="card" href="08-mulgate-creek-west/viewer.html">
       <div class="num">Site 8</div>
       <div class="name">Mulgate Creek West</div>
       <div class="status">View 360° →</div>
     </a>
-
   </div>
+
+  <h2>How these panoramas were made</h2>
+
+  <div class="specs">
+    <div class="spec"><div class="val">155</div><div class="lbl">raw DNG frames per site</div></div>
+    <div class="spec"><div class="val">535 MP</div><div class="lbl">stitched panorama (Site 2)</div></div>
+    <div class="spec"><div class="val">32,716 × 16,358</div><div class="lbl">pixels, equirectangular</div></div>
+    <div class="spec"><div class="val">98 MB</div><div class="lbl">streamed tile set, 6 zoom levels</div></div>
+  </div>
+
+  <ol class="steps">
+    <li><strong>Capture.</strong> A DJI Mavic 4 Pro hovered at each site in sphere panorama mode, using the 2X camera. It took 155 overlapping raw frames. The narrower lens needs more frames but gives much finer detail.</li>
+    <li><strong>Stitching.</strong> The frames were stitched into one equirectangular panorama in Panovolo 1.12.1.</li>
+    <li><strong>Tiling.</strong> Each panorama was reprojected onto a cube with Hugin's <code>nona</code>, then cut into 512 pixel tiles with Pannellum's multiresolution generator.</li>
+    <li><strong>Viewing.</strong> Pannellum loads only the tiles you are looking at, so a huge image opens quickly on a laptop or phone.</li>
+  </ol>
+
+  <p>Full methods, code and references are in the <a href="https://github.com/williamtsalter/360panos">GitHub repository</a>.</p>
+
+  <h2>Software</h2>
+  <ul class="refs">
+    <li><a href="https://www.panovolo.com/">Panovolo</a> for stitching</li>
+    <li><a href="https://hugin.sourceforge.io/">Hugin</a> for cube map reprojection</li>
+    <li><a href="https://pannellum.org/">Pannellum</a> by Matthew Petroff, the open source viewer (<a href="https://doi.org/10.21105/joss.01628">Petroff 2019, JOSS</a>)</li>
+    <li><a href="https://pages.github.com/">GitHub Pages</a> for free hosting</li>
+  </ul>
+
+  <h2>Acknowledgements</h2>
+  <p>The repository structure, viewer pages and processing script were developed with the assistance of Claude Opus 5.5 (<a href="https://www.anthropic.com/claude">Anthropic</a>), accessed through Microsoft 365 Copilot. All outputs were reviewed, tested and edited by the author.</p>
+
+  <footer>
+    William Salter, School of Life and Environmental Sciences, The University of Sydney.<br>
+    Cite as: Salter, W. T. (2026). Llara Farm 360° Panoramas. <a href="https://github.com/williamtsalter/360panos">github.com/williamtsalter/360panos</a>
+  </footer>
+
 </body>
 </html>
