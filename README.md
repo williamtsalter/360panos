@@ -1,4 +1,4 @@
-# Llara Farm 360° Panoramas
+# The University of Sydney Llara Farm 360° Panoramas
 
 Interactive, high resolution spherical panoramas of field sites at Llara Farm, Narrabri NSW, Australia. They support teaching and outreach at The University of Sydney.
 
