@@ -10,11 +10,11 @@
     p { color:#555; }
     .grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:16px; margin-top:24px; }
     .card {
-      background:white; border-radius:10px; padding:16px;
+      display:block; background:white; border-radius:10px; padding:16px;
       box-shadow:0 2px 6px rgba(0,0,0,0.1); text-decoration:none; color:#333;
       border-left:5px solid #2c6e49;
     }
-    .card:hover { background:#f0f7f4; }
+    a.card:hover { background:#f0f7f4; }
     .card.coming { border-left-color:#ccc; color:#aaa; cursor:default; }
     .card .num { font-size:11px; color:#888; margin-bottom:4px; }
     .card .name { font-weight:bold; font-size:15px; }
@@ -24,7 +24,7 @@
 </head>
 <body>
   <h1>🌾 Llara Farm 360° Panoramas</h1>
-  <p>Select a site to explore the 360° panorama. Use click and drag to look around, scroll to zoom.</p>
+  <p>Select a site to explore the 360° panorama. Click and drag to look around, scroll to zoom.</p>
 
   <div class="grid">
 
@@ -34,19 +34,23 @@
       <div class="status">Coming soon</div>
     </div>
 
-    02-mulgate-creek-driveway-east/viewer.html
+    <a class="card" href="02-mulgate-creek-driveway-east/viewer.html">
+      <div class="num">Site 2</div>
+      <div class="name">Mulgate Creek Driveway East</div>
+      <div class="status">View 360° →</div>
+    </a>
 
-    <div class="card coming">
+    <a class="card" href="03-mulgate-creek-dam/viewer.html">
       <div class="num">Site 3</div>
       <div class="name">Mulgate Creek Dam</div>
-      <div class="status">Coming soon</div>
-    </div>
+      <div class="status">View 360° →</div>
+    </a>
 
-    <div class="card coming">
+    <a class="card" href="04-llara-hillside/viewer.html">
       <div class="num">Site 4</div>
       <div class="name">Llara Hillside</div>
-      <div class="status">Coming soon</div>
-    </div>
+      <div class="status">View 360° →</div>
+    </a>
 
     <div class="card coming">
       <div class="num">Site 5</div>
@@ -54,23 +58,23 @@
       <div class="status">Coming soon</div>
     </div>
 
-    <div class="card coming">
+    <a class="card" href="06-llara-forest/viewer.html">
       <div class="num">Site 6</div>
       <div class="name">Llara Forest</div>
-      <div class="status">Coming soon</div>
-    </div>
+      <div class="status">View 360° →</div>
+    </a>
 
-    <div class="card coming">
+    <a class="card" href="07-horsearm-creek-dam/viewer.html">
       <div class="num">Site 7</div>
       <div class="name">Horsearm Creek Dam</div>
-      <div class="status">Coming soon</div>
-    </div>
+      <div class="status">View 360° →</div>
+    </a>
 
-    <div class="card coming">
+    <a class="card" href="08-mulgate-creek-west/viewer.html">
       <div class="num">Site 8</div>
       <div class="name">Mulgate Creek West</div>
-      <div class="status">Coming soon</div>
-    </div>
+      <div class="status">View 360° →</div>
+    </a>
 
   </div>
 </body>
