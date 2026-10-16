@@ -17,6 +17,8 @@ Interactive, high resolution spherical panoramas of field sites at Llara Farm, N
 | 6 | Llara Forest | [Open viewer](https://williamtsalter.github.io/360panos/06-llara-forest/viewer.html) |
 | 7 | Horsearm Creek Dam | [Open viewer](https://williamtsalter.github.io/360panos/07-horsearm-creek-dam/viewer.html) |
 | 8 | Mulgate Creek West | [Open viewer](https://williamtsalter.github.io/360panos/08-mulgate-creek-west/viewer.html) |
+| extra | Llara Cattle Yards | [Open viewer](https://williamtsalter.github.io/360panos/09-cattle-yards/viewer.html) |
+| extra | Llara 1 Eddy Covariance Tower | [Open viewer](https://williamtsalter.github.io/360panos/10-eddy-covariance-tower/viewer.html) |
 
 Click and drag to look around. Scroll or pinch to zoom.
 
